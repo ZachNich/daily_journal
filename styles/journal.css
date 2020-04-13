@@ -1,4 +1,39 @@
-fieldset {
+.heading__form {
+    margin-left: .7em;
+    padding-bottom: .5em;
+    font-size: large;
+    font-family: 'Courier New', Courier, monospace;
+    display: inline-block;
+}
+
+form {
+    background-color: rgb(231, 231, 231);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+}
+
+.fieldset__journal {
     display: flex;
     flex-direction: column;
+    border: 0;
+}
+
+.fieldset__journal label {
+    margin-bottom: 2px;
+}
+
+#journalConcepts, #journalEntry {
+    min-width: 20em;
+}
+
+#journalDate, #journalMood {
+    width: 9.5em;
+}
+
+.button__journal {
+    margin: .5em 0 1em 1em;
+}
+
+.button__journal:hover {
+    opacity: .7;
 }
