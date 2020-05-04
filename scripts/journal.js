@@ -1,5 +1,5 @@
-import data from "./data";
-import entriesDOM from "./entriesDOM";
+import data from "./data.js";
+import entriesDOM from "./entriesDOM.js";
 
 /*
     Main application logic that uses the functions and objects
@@ -8,4 +8,5 @@ import entriesDOM from "./entriesDOM";
     Change the fake variable names below to what they should be
     to get the data and display it.
 */
-API.getJournalEntries().then(renderJournalEntries())
+
+data.getJournalEntries().then(entriesDOM.renderJournalEntries)
