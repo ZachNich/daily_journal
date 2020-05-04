@@ -1,20 +1,8 @@
-const journalEntries = [];
+    /*
+    Main application logic that uses the functions and objects
+    defined in the other JavaScript files.
 
-const makeJournalEntryComponent = (journalEntry) => {
-    return `<section><p class="date">${journalEntry.date.month} ${journalEntry.date.day}, ${journalEntry.date.year}</p><p class="concepts">${journalEntry.concepts}</p><p class="entry">${journalEntry.entry}</p><p class="mood">${journalEntry.mood}</p></section>`;
-}
-
-const renderJournalEntries = (entries) => {
-    entries.forEach(entry => {
-        document.querySelector('.entryLog').innerHTML += makeJournalEntryComponent(entry);
-    });
-}
-
-fetch('http://localhost:3000/entries')
-.then(response => response.json())
-.then(entries => {
-    entries.forEach(entry => {
-        journalEntries.push(entry);
-    });
-    renderJournalEntries(journalEntries);
-    })
+    Change the fake variable names below to what they should be
+    to get the data and display it.
+*/
+API.getJournalEntries().then(renderJournalEntries(makeJournalEntryComponent()))
