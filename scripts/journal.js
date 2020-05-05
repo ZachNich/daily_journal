@@ -21,16 +21,21 @@ const newJournalEntry = (date, concepts, entry, mood) => ({
 
 document.querySelector('.button__journal').addEventListener('click', event => {
     event.preventDefault();
-    if (document.querySelector('#journalDate').value !== '' &&
-    document.querySelector('#journalConcepts').value !== '' &&
-    document.querySelector('#journalEntry').value !== '' &&
-    document.querySelector('#journalMood').value !== '') {
-    let date = document.querySelector('#journalDate').value
-    let concepts = document.querySelector('#journalConcepts').value
-    let entry = document.querySelector('#journalEntry').value
-    let mood = document.querySelector('#journalMood').value
-        data.saveJournalEntry(newJournalEntry(date, concepts, entry, mood))
-        .then( () => data.getJournalEntries())
-        .then( (data) => entriesDOM.renderJournalEntries(data))
-    } else window.alert('Please complete the required fields.')
+    if (document.querySelector('#journalConcepts').checkValidity() == false ||
+    document.querySelector('#journalEntry').checkValidity() == false) {
+        window.alert('Please use permitted characters only.');
+    } else {
+        if (document.querySelector('#journalDate').value !== '' &&
+        document.querySelector('#journalConcepts').value !== '' &&
+        document.querySelector('#journalEntry').value !== '' &&
+        document.querySelector('#journalMood').value !== '') {
+        let date = document.querySelector('#journalDate').value
+        let concepts = document.querySelector('#journalConcepts').value
+        let entry = document.querySelector('#journalEntry').value
+        let mood = document.querySelector('#journalMood').value
+            data.saveJournalEntry(newJournalEntry(date, concepts, entry, mood))
+            .then( () => data.getJournalEntries())
+            .then( (data) => entriesDOM.renderJournalEntries(data))
+        } else window.alert('Please complete the required fields.')
+    }
 })
