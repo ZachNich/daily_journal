@@ -39,3 +39,11 @@ document.querySelector('.button__journal').addEventListener('click', event => {
         } else window.alert('Please complete the required fields.')
     }
 })
+
+document.getElementsByName('mood__filter').forEach(element => element.addEventListener('click', event => {
+    const mood = event.target.value;
+    data.getJournalEntries()
+    .then(data => {
+        entriesDOM.renderJournalEntries(data.filter(entry => entry.mood == mood));
+    }
+)}))

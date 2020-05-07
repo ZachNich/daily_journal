@@ -9,6 +9,19 @@
 <body>
     <heading class="heading__form">Daily Journal</heading>
     <form action="">
+        <fieldset class="fieldset__filter">
+            <legend>Filter entries by mood</legend>
+            <input type="radio" name="mood__filter" id="apathetic_filter" value="Apathetic">
+            <label for="apathetic_filter">Apathetic</label>
+            <input type="radio" name="mood__filter" id="energetic_filter" value="Energetic">
+            <label for="energetic_filter">Energetic</label>
+            <input type="radio" name="mood__filter" id="neutral_filter" value="Neutral">
+            <label for="neutral_filter">Neutral</label>
+            <input type="radio" name="mood__filter" id="optomistic_filter" value="Optomistic">
+            <label for="optomistic_filter">Optomistic</label>
+            <input type="radio" name="mood__filter" id="overwhelmed_filter" value="Overwhelmed">
+            <label for="overwhelmed_filter">Overwhelmed</label>
+        </fieldset>
         <fieldset class="fieldset__journal">
             <label for="journalDate">Date of entry</label>
             <input type="date" name="journalDate" id="journalDate">

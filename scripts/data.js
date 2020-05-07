@@ -4,7 +4,6 @@ const API = {
             .then(response => response.json())
     },
     saveJournalEntry (entry) {
-        console.log(entry)
         return fetch('http://localhost:3000/entries', {
             method: "POST",
             headers: {
