@@ -10,8 +10,14 @@ const API = {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(entry)
-    })
-}
+        })
+    },
+    deleteJournalEntry (entryID) {
+        return fetch(`http://localhost:3000/entries/${entryID}`, {
+            method: "DELETE"
+        })
+        .then(response => response.json())
+    }
 }
 
 
