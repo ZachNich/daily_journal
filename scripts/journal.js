@@ -9,7 +9,7 @@ import entriesDOM from "./entriesDOM.js";
     to get the data and display it.
 */
 
-// data.getJournalEntries().then(entriesDOM.renderJournalEntries)
+// creates journal entry object
 
 const newJournalEntry = (date, concepts, entry, mood) => ({
     date: date,
@@ -18,6 +18,9 @@ const newJournalEntry = (date, concepts, entry, mood) => ({
     mood: mood
 })
 
+// click event for Record Journal Entry button
+// checks validity of inputs and if they're filled out
+// saves entry to database, then displays all entries on DOM 
 
 document.querySelector('.button__journal').addEventListener('click', event => {
     event.preventDefault();
@@ -40,10 +43,26 @@ document.querySelector('.button__journal').addEventListener('click', event => {
     }
 })
 
+// click event for Filter by Mood radio list
+// displays entries that match the mood selected
+
 document.getElementsByName('mood__filter').forEach(element => element.addEventListener('click', event => {
     const mood = event.target.value;
     data.getJournalEntries()
     .then(data => {
         entriesDOM.renderJournalEntries(data.filter(entry => entry.mood == mood));
     }
-)}))
+    )}))
+
+// click event for Delete Entry button
+
+document.querySelector('.entryLog').addEventListener('click', event => {
+    if (event.target.id.startsWith('delete')) {
+        const entryID = event.target.id.split('-')[1]
+        data.deleteJournalEntry(entryID)
+        .then( () => data.getJournalEntries())
+        .then(data => {
+            entriesDOM.renderJournalEntries(data)
+        })
+    }
+})
