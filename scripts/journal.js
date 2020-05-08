@@ -27,20 +27,25 @@ document.querySelector('.button__journal').addEventListener('click', event => {
     if (document.querySelector('#journalConcepts').checkValidity() == false ||
     document.querySelector('#journalEntry').checkValidity() == false) {
         window.alert('Please use permitted characters only.');
-    } else {
-        if (document.querySelector('#journalDate').value !== '' &&
-        document.querySelector('#journalConcepts').value !== '' &&
-        document.querySelector('#journalEntry').value !== '' &&
-        document.querySelector('#journalMood').value !== '') {
+    } else if (document.querySelector('#journalConcepts').value.includes('fuck') ||
+    document.querySelector('#journalEntry').value.includes('fuck') ||  
+    document.querySelector('#journalConcepts').value.includes('bitch') ||
+    document.querySelector('#journalEntry').value.includes('bitch') ||
+    document.querySelector('#journalConcepts').value.includes('shit') ||
+    document.querySelector('#journalEntry').value.includes('shit')) {
+        window.alert('Watch your mouth.');
+    } else if (document.querySelector('#journalDate').value !== '' &&
+    document.querySelector('#journalConcepts').value !== '' &&
+    document.querySelector('#journalEntry').value !== '' &&
+    document.querySelector('#journalMood').value !== '') {
         let date = document.querySelector('#journalDate').value
         let concepts = document.querySelector('#journalConcepts').value
         let entry = document.querySelector('#journalEntry').value
         let mood = document.querySelector('#journalMood').value
-            data.saveJournalEntry(newJournalEntry(date, concepts, entry, mood))
-            .then( () => data.getJournalEntries())
-            .then( (data) => entriesDOM.renderJournalEntries(data))
-        } else window.alert('Please complete the required fields.')
-    }
+        data.saveJournalEntry(newJournalEntry(date, concepts, entry, mood))
+        .then( () => data.getJournalEntries())
+        .then( (data) => entriesDOM.renderJournalEntries(data))
+    } else window.alert('Please complete the required fields.')
 })
 
 // click event for Filter by Mood radio list
