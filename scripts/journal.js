@@ -20,7 +20,9 @@ const newJournalEntry = (date, concepts, entry, mood) => ({
 
 // click event for Record Journal Entry button
 // checks validity of inputs and if they're filled out
-// saves entry to database, then displays all entries on DOM 
+// saves entry to database
+// OR edits entry in database if edit button clicked to populate input fields
+// outputs all entries to DOM
 
 document.querySelector('.button__journal').addEventListener('click', event => {
     event.preventDefault();
@@ -38,13 +40,21 @@ document.querySelector('.button__journal').addEventListener('click', event => {
     document.querySelector('#journalConcepts').value !== '' &&
     document.querySelector('#journalEntry').value !== '' &&
     document.querySelector('#journalMood').value !== '') {
-        let date = document.querySelector('#journalDate').value
-        let concepts = document.querySelector('#journalConcepts').value
-        let entry = document.querySelector('#journalEntry').value
-        let mood = document.querySelector('#journalMood').value
-        data.saveJournalEntry(newJournalEntry(date, concepts, entry, mood))
-        .then( () => data.getJournalEntries())
-        .then( (data) => entriesDOM.renderJournalEntries(data))
+        const editedEntry = {
+            date: document.querySelector('#journalDate').value,
+            concepts: document.querySelector('#journalConcepts').value,
+            entry: document.querySelector('#journalEntry').value,
+            mood: document.querySelector('#journalMood').value
+        }
+        if (document.getElementById('journalId').value !== '') {
+            data.editJournalEntry(editedEntry, document.getElementById('journalId').value)
+            .then( () => data.getJournalEntries())
+            .then( (data) => entriesDOM.renderJournalEntries(data))
+        } else {
+            data.saveJournalEntry(newJournalEntry(date, concepts, entry, mood))
+            .then( () => data.getJournalEntries())
+            .then( (data) => entriesDOM.renderJournalEntries(data))
+        }
     } else window.alert('Please complete the required fields.')
 })
 
@@ -59,15 +69,29 @@ document.getElementsByName('mood__filter').forEach(element => element.addEventLi
     }
     )}))
 
-// click event for Delete Entry button
+// click event for Delete Entry button and Edit Entry button
+
+const prefillSearch = (entryObject) => {
+    document.getElementById('journalId').value = entryObject.id
+    document.getElementById('journalDate').value = entryObject.date
+    document.getElementById('journalMood').value = entryObject.mood
+    document.getElementById('journalConcepts').value = entryObject.concepts
+    document.getElementById('journalEntry').value = entryObject.entry
+}
 
 document.querySelector('.entryLog').addEventListener('click', event => {
     if (event.target.id.startsWith('delete')) {
-        const entryID = event.target.id.split('-')[1]
+        let entryID = event.target.id.split('-')[1]
         data.deleteJournalEntry(entryID)
         .then( () => data.getJournalEntries())
         .then(data => {
             entriesDOM.renderJournalEntries(data)
+        })
+    } else if (event.target.id.startsWith('edit')) {
+        let entryID = event.target.id.split('-')[1]
+        data.getJournalEntry(entryID)
+        .then(entryObject => {
+            prefillSearch(entryObject)
         })
     }
 })

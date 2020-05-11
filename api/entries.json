@@ -8,11 +8,11 @@
       "mood": "Optomistic"
     },
     {
-      "id": 2,
       "date": "2020-04-17",
-      "concepts": "HTML/CSS",
+      "concepts": "HTML, CSS",
       "entry": "Learned how to use flexbox and other CSS tools to style an HTML page. Also learned how to create an HTML skeleton with wireframing and sections before using CSS to style.",
-      "mood": "Energetic"
+      "mood": "Energetic",
+      "id": 2
     },
     {
       "id": 3,
