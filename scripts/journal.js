@@ -104,3 +104,20 @@ document.querySelector('.entryLog').addEventListener('click', event => {
         })
     }
 })
+
+// keypress event for Search journal entries field
+
+document.querySelector('.fieldset__search').addEventListener('keypress', event => {
+    if (event.keyCode === 13) {
+        let matchingEntries = new Set()
+        data.getJournalEntries()
+            .then(entries => entries.forEach(entry => {
+                Object.values(entry).forEach(value => {
+                    if (value.toString(10).includes(event.target.value)) {
+                        matchingEntries.add(entry)
+                    }
+                })
+                entriesDOM.renderJournalEntries(matchingEntries);
+            }))
+    }
+})

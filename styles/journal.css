@@ -37,3 +37,12 @@ form {
 .button__journal:hover {
     opacity: .7;
 }
+
+.sort__container {
+    display: flex;
+}
+
+.fieldset__search {
+    flex: auto;
+    margin-left: 2em
+}
