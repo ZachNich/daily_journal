@@ -15,11 +15,11 @@
       "moodId": 2
     },
     {
-      "id": 3,
       "date": "2020-04-14",
-      "concepts": "Teamwork, Presenting, GitHub",
+      "concepts": "Teamwork, Presenting",
       "entry": "Learned how to discuss/plan/produce as a team with different ideas & skills. Also put together quick presentation with group and struggled through learning GitHub flow with pushes and pulls in a group setting.",
-      "moodId": 5
+      "moodId": "5",
+      "id": 3
     }
   ],
   "moods": [

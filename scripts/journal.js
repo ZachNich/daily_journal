@@ -10,11 +10,11 @@ data.getMoods().then(moods => {
 
 // creates journal entry object
 
-const newJournalEntry = (date, concepts, entry, mood) => ({
-    date: date,
-    concepts: concepts,
-    entry: entry,
-    mood: mood
+const newJournalEntry = (date, concepts, entry, moodId) => ({
+    date,
+    concepts,
+    entry,
+    moodId
 })
 
 // click event for Record Journal Entry button
@@ -39,18 +39,22 @@ document.querySelector('.button__journal').addEventListener('click', event => {
     document.querySelector('#journalConcepts').value !== '' &&
     document.querySelector('#journalEntry').value !== '' &&
     document.querySelector('#journalMood').value !== '') {
+        let date = document.querySelector('#journalDate').value
+        let concepts = document.querySelector('#journalConcepts').value
+        let entry = document.querySelector('#journalEntry').value
+        let moodId = document.querySelector('#journalMood').value
         const editedEntry = {
-            date: document.querySelector('#journalDate').value,
-            concepts: document.querySelector('#journalConcepts').value,
-            entry: document.querySelector('#journalEntry').value,
-            mood: document.querySelector('#journalMood').value
+            date: date,
+            concepts: concepts,
+            entry: entry,
+            moodId: moodId
         }
         if (document.getElementById('journalId').value !== '') {
             data.editJournalEntry(editedEntry, document.getElementById('journalId').value)
             .then( () => data.getJournalEntries())
             .then( (data) => entriesDOM.renderJournalEntries(data))
         } else {
-            data.saveJournalEntry(newJournalEntry(date, concepts, entry, mood))
+            data.saveJournalEntry(newJournalEntry(date, concepts, entry, moodId))
             .then( () => data.getJournalEntries())
             .then( (data) => entriesDOM.renderJournalEntries(data))
         }
@@ -60,15 +64,18 @@ document.querySelector('.button__journal').addEventListener('click', event => {
 // click event for Filter by Mood radio list
 // displays entries that match the mood selected
 
-document.querySelector('.fieldset__filter').addEventListener('click', event => {
-    console.log(document.getElementsByName('mood__filter'))
-    document.getElementsByName('mood__filter').forEach(element => element.addEventListener('click', event => {
-        const mood = event.target.value;
-        data.getJournalEntries()
-        .then(data => {
-            entriesDOM.renderJournalEntries(data.filter(entry => entry.mood == mood));
-        })
-    }))
+let counter = 0;
+document.querySelector('.fieldset__filter').addEventListener('mouseover', event => {
+    if (counter === 0) {
+        document.getElementsByName('mood__filter').forEach(element => element.addEventListener('click', event => {
+            const mood = event.target.value;
+            data.getJournalEntries()
+            .then(data => {
+                entriesDOM.renderJournalEntries(data.filter(entry => entry.mood.label == mood));
+            })
+        }))
+        counter++;
+    }
 })
 
 // click event for Delete Entry button and Edit Entry button

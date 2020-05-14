@@ -4,7 +4,7 @@ const makeJournalEntry = (journalEntry) => {
         <p class="date">${journalEntry.date}</p>
         <p class="concepts">${journalEntry.concepts}</p>
         <p class="entry">${journalEntry.entry}</p>
-        <p class="mood">${journalEntry.mood}</p>
+        <p class="mood">${journalEntry.mood.label}</p>
     </section>
     <button id='delete-${journalEntry.id}'>Delete Entry</button>
     <button id='edit-${journalEntry.id}'>Edit Entry</button>
@@ -20,7 +20,7 @@ const makeRadioSelect = (mood) => {
 
 const makeOptionSelect = (mood) => {
     return `
-    <option value="${mood.label}">${mood.label}</option>
+    <option value="${mood.id}">${mood.label}</option>
     `
 }
 
