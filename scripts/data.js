@@ -19,7 +19,7 @@ const API = {
         .then(response => response.json())
     },
     getJournalEntry (entryID) {
-        return fetch(`http://localhost:3000/entries/${entryID}`)
+        return fetch(`http://localhost:3000/entries/${entryID}?_expand=mood`)
         .then(response => response.json())
     },
     editJournalEntry (entry, entryID) {
@@ -32,6 +32,10 @@ const API = {
         })
         .then(response => response.json())
         .then(() => document.getElementById('journalId').value = '')
+    },
+    getMoods() {
+        return fetch('http://localhost:3000/moods')
+            .then(response => response.json())
     }
 }
 

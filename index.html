@@ -8,44 +8,37 @@
 </head>
 <body>
     <heading class="heading__form">Daily Journal</heading>
-    <form action="">
+    <form action="" class="form__main">
+        
         <fieldset class="fieldset__filter">
             <legend>Filter entries by mood</legend>
-            <input type="radio" name="mood__filter" id="apathetic_filter" value="Apathetic">
-            <label for="apathetic_filter">Apathetic</label>
-            <input type="radio" name="mood__filter" id="energetic_filter" value="Energetic">
-            <label for="energetic_filter">Energetic</label>
-            <input type="radio" name="mood__filter" id="neutral_filter" value="Neutral">
-            <label for="neutral_filter">Neutral</label>
-            <input type="radio" name="mood__filter" id="optomistic_filter" value="Optomistic">
-            <label for="optomistic_filter">Optomistic</label>
-            <input type="radio" name="mood__filter" id="overwhelmed_filter" value="Overwhelmed">
-            <label for="overwhelmed_filter">Overwhelmed</label>
         </fieldset>
+
         <input type="hidden" id="journalId" value="" />
+
         <fieldset class="fieldset__journal">
             <label for="journalDate">Date of entry</label>
             <input type="date" name="journalDate" id="journalDate">
         </fieldset>
+
         <fieldset class="fieldset__journal">
             <label for="journalMood">Mood for the day</label>
             <select name="journalMood" id="journalMood">
-                <option value="Apathetic">Apathetic</option>
-                <option value="Energetic">Energetic</option>
-                <option value="Neutral">Neutral</option>
-                <option value="Optomistic">Optomistic</option>
-                <option value="Overwhelmed">Overwhelmed</option>
             </select>
         </fieldset>
+
         <fieldset class="fieldset__journal">
             <label for="journalConcepts">Concepts covered</label>
             <input type="textarea" pattern="[a-zA-Z0-9(){}:;,.?! ]+" title="Only letters, numbers, and (){}:;,.?! allowed." maxlength="40" name="journalConcepts" id="journalConcepts">
         </fieldset>
+
         <fieldset class="fieldset__journal">
             <label for="journalEntry">Journal entry</label>
             <textarea name="journalEntry" pattern="[a-zA-Z0-9(){}:;,.?! ]+" title="Only letters, numbers, and (){}:;,.?! allowed." id="journalEntry" rows="6"></textarea>
         </fieldset>
+
         <button class="button__journal">Record Journal Entry</button>
+
     </form>
     <article class="entryLog"></article>
     <script type="module" src="scripts/journal.js"></script>

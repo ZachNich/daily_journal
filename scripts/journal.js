@@ -1,13 +1,12 @@
 import data from "./data.js";
 import entriesDOM from "./entriesDOM.js";
 
-/*
-    Main application logic that uses the functions and objects
-    defined in the other JavaScript files.
+// fills in initial select options and radio buttons
 
-    Change the fake variable names below to what they should be
-    to get the data and display it.
-*/
+data.getMoods().then(moods => {
+    entriesDOM.renderRadioButtons(moods)
+    entriesDOM.renderSelectOptions(moods)
+})
 
 // creates journal entry object
 
@@ -61,20 +60,23 @@ document.querySelector('.button__journal').addEventListener('click', event => {
 // click event for Filter by Mood radio list
 // displays entries that match the mood selected
 
-document.getElementsByName('mood__filter').forEach(element => element.addEventListener('click', event => {
-    const mood = event.target.value;
-    data.getJournalEntries()
-    .then(data => {
-        entriesDOM.renderJournalEntries(data.filter(entry => entry.mood == mood));
-    }
-    )}))
+document.querySelector('.fieldset__filter').addEventListener('click', event => {
+    console.log(document.getElementsByName('mood__filter'))
+    document.getElementsByName('mood__filter').forEach(element => element.addEventListener('click', event => {
+        const mood = event.target.value;
+        data.getJournalEntries()
+        .then(data => {
+            entriesDOM.renderJournalEntries(data.filter(entry => entry.mood == mood));
+        })
+    }))
+})
 
 // click event for Delete Entry button and Edit Entry button
 
 const prefillSearch = (entryObject) => {
     document.getElementById('journalId').value = entryObject.id
     document.getElementById('journalDate').value = entryObject.date
-    document.getElementById('journalMood').value = entryObject.mood
+    document.getElementById('journalMood').value = entryObject.mood.label
     document.getElementById('journalConcepts').value = entryObject.concepts
     document.getElementById('journalEntry').value = entryObject.entry
 }
