@@ -36,7 +36,7 @@ const API = {
     getMoods() {
         return fetch('http://localhost:3000/moods')
             .then(response => response.json())
-    }
+    },
 }
 
 

@@ -10,23 +10,19 @@
     <heading class="heading__form">Daily Journal</heading>
     <form action="" class="form__main">
         
-        <fieldset class="fieldset__filter">
-            <legend>Filter entries by mood</legend>
-        </fieldset>
-
         <input type="hidden" id="journalId" value="" />
-
+        
         <fieldset class="fieldset__journal">
             <label for="journalDate">Date of entry</label>
             <input type="date" name="journalDate" id="journalDate">
         </fieldset>
-
+        
         <fieldset class="fieldset__journal">
             <label for="journalMood">Mood for the day</label>
             <select name="journalMood" id="journalMood">
             </select>
         </fieldset>
-
+        
         <fieldset class="fieldset__journal">
             <label for="journalConcepts">Concepts covered</label>
             <input type="textarea" pattern="[a-zA-Z0-9(){}:;,.?! ]+" title="Only letters, numbers, and (){}:;,.?! allowed." maxlength="40" name="journalConcepts" id="journalConcepts">
@@ -36,10 +32,22 @@
             <label for="journalEntry">Journal entry</label>
             <textarea name="journalEntry" pattern="[a-zA-Z0-9(){}:;,.?! ]+" title="Only letters, numbers, and (){}:;,.?! allowed." id="journalEntry" rows="6"></textarea>
         </fieldset>
-
+        
         <button class="button__journal">Record Journal Entry</button>
-
+        
     </form>
+
+    <div class="sort__container">
+        <fieldset class="fieldset__filter">
+            <legend>Filter entries by mood</legend>
+        </fieldset>
+            
+        <fieldset class="fieldset__search">
+            <legend>Search journal entries</legend>
+            <input type="text" placeholder="Enter search term">
+        </fieldset>
+    </div>
+    
     <article class="entryLog"></article>
     <script type="module" src="scripts/journal.js"></script>
 </body>
