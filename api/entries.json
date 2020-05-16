@@ -5,21 +5,24 @@
       "date": "2020-04-20",
       "concepts": "Javscript Objects",
       "entry": "Learned to construct and access JS objects. Also learned to use .querySelector to access and modify DOM.",
-      "moodId": 4
+      "moodId": 4,
+      "instructorId": 3
     },
     {
       "id": 2,
       "date": "2020-04-17",
       "concepts": "HTML, CSS",
       "entry": "Learned how to use flexbox and other CSS tools to style an HTML page. Also learned how to create an HTML skeleton with wireframing and sections before using CSS to style.",
-      "moodId": 2
+      "moodId": 2,
+      "instructorId": 1
     },
     {
+      "id": 3,
       "date": "2020-04-14",
       "concepts": "Teamwork, Presenting",
       "entry": "Learned how to discuss/plan/produce as a team with different ideas & skills. Also put together quick presentation with group and struggled through learning GitHub flow with pushes and pulls in a group setting.",
-      "moodId": "5",
-      "id": 3
+      "moodId": 5,
+      "instructorId": 2
     }
   ],
   "moods": [
@@ -42,6 +45,23 @@
     {
       "id": 5,
       "label": "Overwhelmed"
+    }
+  ],
+  "instructors": [
+    {
+      "id": 1,
+      "firstName": "Joe",
+      "lastName": "Shepard"
+    },
+    {
+      "id": 2,
+      "firstName": "Bryan",
+      "lastName": "Nilsen"
+    },
+    {
+      "id": 3,
+      "firstName": "Sage",
+      "lastName": "Klein"
     }
   ]
 }

@@ -5,16 +5,21 @@ import entriesDOM from "./entriesDOM.js";
 
 data.getMoods().then(moods => {
     entriesDOM.renderRadioButtons(moods)
-    entriesDOM.renderSelectOptions(moods)
+    entriesDOM.renderMoodOptions(moods)
+})
+
+data.getInstructors().then(instructors => {
+    entriesDOM.renderInstructorOptions(instructors)
 })
 
 // creates journal entry object
 
-const newJournalEntry = (date, concepts, entry, moodId) => ({
+const newJournalEntry = (date, concepts, entry, moodId, instructorId) => ({
     date,
     concepts,
     entry,
-    moodId
+    moodId,
+    instructorId
 })
 
 // click event for Record Journal Entry button
@@ -42,19 +47,21 @@ document.querySelector('.button__journal').addEventListener('click', event => {
         let date = document.querySelector('#journalDate').value
         let concepts = document.querySelector('#journalConcepts').value
         let entry = document.querySelector('#journalEntry').value
-        let moodId = document.querySelector('#journalMood').value
+        let moodId = parseInt(document.querySelector('#journalMood').value, 10)
+        let instructorId = parseInt(document.querySelector('#journalInstructor').value, 10)
         const editedEntry = {
             date: date,
             concepts: concepts,
             entry: entry,
-            moodId: moodId
+            moodId: moodId,
+            instructorId: instructorId
         }
         if (document.getElementById('journalId').value !== '') {
             data.editJournalEntry(editedEntry, document.getElementById('journalId').value)
             .then( () => data.getJournalEntries())
             .then( (data) => entriesDOM.renderJournalEntries(data))
         } else {
-            data.saveJournalEntry(newJournalEntry(date, concepts, entry, moodId))
+            data.saveJournalEntry(newJournalEntry(date, concepts, entry, moodId, instructorId))
             .then( () => data.getJournalEntries())
             .then( (data) => entriesDOM.renderJournalEntries(data))
         }
@@ -81,9 +88,11 @@ document.querySelector('.fieldset__filter').addEventListener('mouseover', event 
 // click event for Delete Entry button and Edit Entry button
 
 const prefillSearch = (entryObject) => {
+    console.log(entryObject)
     document.getElementById('journalId').value = entryObject.id
     document.getElementById('journalDate').value = entryObject.date
-    document.getElementById('journalMood').value = entryObject.mood.label
+    document.getElementById('journalMood').value = entryObject.moodId
+    document.getElementById('journalInstructor').value = entryObject.instructorId
     document.getElementById('journalConcepts').value = entryObject.concepts
     document.getElementById('journalEntry').value = entryObject.entry
 }
