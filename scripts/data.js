@@ -1,6 +1,6 @@
 const API = {
     getJournalEntries () {
-        return fetch("http://localhost:3000/entries?_expand=mood")
+        return fetch("http://localhost:3000/entries?_expand=mood&_expand=instructor")
             .then(response => response.json())
     },
     saveJournalEntry (entry) {
@@ -19,7 +19,7 @@ const API = {
         .then(response => response.json())
     },
     getJournalEntry (entryID) {
-        return fetch(`http://localhost:3000/entries/${entryID}?_expand=mood`)
+        return fetch(`http://localhost:3000/entries/${entryID}`)
         .then(response => response.json())
     },
     editJournalEntry (entry, entryID) {
@@ -37,6 +37,10 @@ const API = {
         return fetch('http://localhost:3000/moods')
             .then(response => response.json())
     },
+    getInstructors() {
+        return fetch('http://localhost:3000/instructors')
+            .then(response => response.json())
+    }
 }
 
 

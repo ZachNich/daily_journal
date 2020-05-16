@@ -6,9 +6,15 @@ const renderRadioButtons = (moods) => {
     })
 }
 
-const renderSelectOptions = (moods) => {
+const renderMoodOptions = (moods) => {
     moods.forEach(mood => {
-        document.getElementById('journalMood').innerHTML += components.makeOptionSelect(mood);
+        document.getElementById('journalMood').innerHTML += components.makeMoodSelect(mood);
+    })
+}
+
+const renderInstructorOptions = (instructors) => {
+    instructors.forEach(instructor => {
+        document.getElementById('journalInstructor').innerHTML += components.makeInstructorSelect(instructor);
     })
 }
 
@@ -19,4 +25,4 @@ const renderJournalEntries = (entries) => {
     });
 }
 
-export default { renderJournalEntries, renderRadioButtons, renderSelectOptions }
+export default { renderJournalEntries, renderRadioButtons, renderMoodOptions, renderInstructorOptions }
