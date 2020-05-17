@@ -25,4 +25,10 @@ const renderJournalEntries = (entries) => {
     });
 }
 
-export default { renderJournalEntries, renderRadioButtons, renderMoodOptions, renderInstructorOptions }
+const renderTagCheckbox = (tags) => {
+    tags.forEach(tag => {
+        document.getElementById('tags-checkbox').innerHTML += components.makeTagCheckbox(tag);
+    })
+}
+
+export default { renderJournalEntries, renderRadioButtons, renderMoodOptions, renderInstructorOptions, renderTagCheckbox }

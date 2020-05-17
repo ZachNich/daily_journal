@@ -1,28 +1,28 @@
 {
   "entries": [
     {
-      "id": 1,
       "date": "2020-04-20",
-      "concepts": "Javscript Objects",
+      "concepts": "Javascript Objects",
       "entry": "Learned to construct and access JS objects. Also learned to use .querySelector to access and modify DOM.",
       "moodId": 4,
-      "instructorId": 3
+      "instructorId": 3,
+      "id": 1
     },
     {
-      "id": 2,
       "date": "2020-04-17",
       "concepts": "HTML, CSS",
       "entry": "Learned how to use flexbox and other CSS tools to style an HTML page. Also learned how to create an HTML skeleton with wireframing and sections before using CSS to style.",
       "moodId": 2,
-      "instructorId": 1
+      "instructorId": 1,
+      "id": 2
     },
     {
-      "id": 3,
       "date": "2020-04-14",
       "concepts": "Teamwork, Presenting",
       "entry": "Learned how to discuss/plan/produce as a team with different ideas & skills. Also put together quick presentation with group and struggled through learning GitHub flow with pushes and pulls in a group setting.",
       "moodId": 5,
-      "instructorId": 2
+      "instructorId": 2,
+      "id": 3
     }
   ],
   "moods": [
@@ -62,6 +62,86 @@
       "id": 3,
       "firstName": "Sage",
       "lastName": "Klein"
+    }
+  ],
+  "tags": [
+    {
+      "id": 1,
+      "label": "Javascript"
+    },
+    {
+      "id": 2,
+      "label": "HTML"
+    },
+    {
+      "id": 3,
+      "label": "CSS"
+    },
+    {
+      "id": 4,
+      "label": "React"
+    },
+    {
+      "id": 5,
+      "label": "Data"
+    },
+    {
+      "id": 6,
+      "label": "Github"
+    },
+    {
+      "id": 7,
+      "label": "Team project"
+    },
+    {
+      "id": 8,
+      "label": "Objects"
+    },
+    {
+      "id": 9,
+      "label": "Functions"
+    }
+  ],
+  "entriesTags": [
+    {
+      "id": 1,
+      "entriesId": 1,
+      "tagsId": 1
+    },
+    {
+      "id": 2,
+      "entriesId": 1,
+      "tagsId": 2
+    },
+    {
+      "id": 3,
+      "entriesId": 1,
+      "tagsId": 8
+    },
+    {
+      "id": 7,
+      "entriesId": 3,
+      "tagsId": 6
+    },
+    {
+      "id": 8,
+      "entriesId": 3,
+      "tagsId": 7
+    },
+    {
+      "entriesId": 2,
+      "tagsId": 2,
+      "id": 9
+    },
+    {
+      "entriesId": 2,
+      "tagsId": 3,
+      "id": 10
+    },
+    {
+      "entriesId": 2,
+      "tagsId": 7,
+      "id": 11
     }
   ]
 }

@@ -30,8 +30,15 @@ form {
     width: 9.5em;
 }
 
+.fieldset__checkbox {
+    margin-left: .8em;
+    padding: .4em .5em 1em .5em;
+}
+
 .button__journal {
-    margin: .5em 0 1em 1em;
+    margin: .5em 0 .5em .8em;
+    padding: 1em 2em 1em 2em;
+
 }
 
 .button__journal:hover {
@@ -46,3 +53,23 @@ form {
     flex: auto;
     margin-left: 2em
 }
+
+.fieldset__filter {
+    margin-left: .5em;
+}
+
+
+
+
+
+
+
+.abs {
+    display: none;
+}
+
+
+
+
+
+

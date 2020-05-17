@@ -31,4 +31,10 @@ const makeInstructorSelect = (instructor) => {
     `
 }
 
-export default { makeJournalEntry, makeRadioSelect, makeMoodSelect, makeInstructorSelect }
+const makeTagCheckbox = (tag) => {
+    return `
+    <input type="checkbox" class="unchecked" name="tag__checkbox" id="tag-${tag.id}" value="${tag.label}">
+    <label for="${tag.label}">${tag.label}</label>
+    `
+}
+export default { makeJournalEntry, makeRadioSelect, makeMoodSelect, makeInstructorSelect, makeTagCheckbox }
