@@ -1,7 +1,7 @@
 import data from "./data.js";
 import entriesDOM from "./entriesDOM.js";
 
-// fills in initial select options and radio buttons
+// fills in initial select options, radio buttons, and tag checkbox
 
 data.getMoods().then(moods => {
     entriesDOM.renderRadioButtons(moods)
@@ -10,6 +10,10 @@ data.getMoods().then(moods => {
 
 data.getInstructors().then(instructors => {
     entriesDOM.renderInstructorOptions(instructors)
+})
+
+data.getTags().then(tags => {
+    entriesDOM.renderTagCheckbox(tags)
 })
 
 // creates journal entry object
@@ -39,7 +43,7 @@ document.querySelector('.button__journal').addEventListener('click', event => {
     document.querySelector('#journalEntry').value.includes('bitch') ||
     document.querySelector('#journalConcepts').value.includes('shit') ||
     document.querySelector('#journalEntry').value.includes('shit')) {
-        window.alert('Watch your mouth.');
+        window.alert('Watch your fucking mouth.');
     } else if (document.querySelector('#journalDate').value !== '' &&
     document.querySelector('#journalConcepts').value !== '' &&
     document.querySelector('#journalEntry').value !== '' &&
@@ -49,24 +53,65 @@ document.querySelector('.button__journal').addEventListener('click', event => {
         let entry = document.querySelector('#journalEntry').value
         let moodId = parseInt(document.querySelector('#journalMood').value, 10)
         let instructorId = parseInt(document.querySelector('#journalInstructor').value, 10)
+        let checked = Array.from(document.getElementsByClassName('checked')).map(tag => tag.id.split('-')[1])
+        let unchecked = Array.from(document.getElementsByClassName('unchecked')).map(tag => tag.id.split('-')[1])
         const editedEntry = {
-            date: date,
-            concepts: concepts,
-            entry: entry,
-            moodId: moodId,
-            instructorId: instructorId
+            date,
+            concepts,
+            entry,
+            moodId,
+            instructorId
         }
-        if (document.getElementById('journalId').value !== '') {
-            data.editJournalEntry(editedEntry, document.getElementById('journalId').value)
-            .then( () => data.getJournalEntries())
-            .then( (data) => entriesDOM.renderJournalEntries(data))
+        let journalId = document.getElementById('journalId').value
+        if (journalId !== '') {
+            data.editJournalEntry(editedEntry, journalId)
+                .then( () => data.getEntriesTags())
+                .then(entriesTags => entriesTags.forEach(entryTag => {
+                    if (entryTag.entriesId == journalId) {
+                        data.deleteEntriesTags(entryTag.id)
+                    }
+                }))
+                .then( () => {
+                    checked.forEach(tagId => {
+                        let newEntriesTags = {
+                            "entriesId": parseInt(journalId, 10),
+                            "tagsId": parseInt(tagId, 10)
+                        }
+                        data.saveEntriesTags(newEntriesTags)
+                    })
+                })
+                .then( () => data.getJournalEntries())
+                .then( (data) => entriesDOM.renderJournalEntries(data))
+            
         } else {
             data.saveJournalEntry(newJournalEntry(date, concepts, entry, moodId, instructorId))
-            .then( () => data.getJournalEntries())
-            .then( (data) => entriesDOM.renderJournalEntries(data))
+                .then( () => data.getJournalEntries())
+                .then( (entries) => {
+                    checked.forEach(tagId => {
+                        let newEntriesTags = {
+                            "entriesId": entries[entries.length - 1].id,
+                            "tagsId": parseInt(tagId, 10)
+                        }
+                        data.saveEntriesTags(newEntriesTags)
+                    })
+                    entriesDOM.renderJournalEntries(entries)
+                })    
         }
     } else window.alert('Please complete the required fields.')
 })
+
+// click event for tags checkbox
+// adds or removes "checked/unchecked" class on clicked boxes
+document.getElementById('tags-checkbox').addEventListener('click', event => {
+    if (event.target.id.startsWith('tag-')) {
+        if (event.target.className === 'unchecked') {
+            event.target.className = "checked"
+        } else {
+            event.target.className = "unchecked"
+        }
+    }
+})
+
 
 // click event for Filter by Mood radio list
 // displays entries that match the mood selected
@@ -88,7 +133,6 @@ document.querySelector('.fieldset__filter').addEventListener('mouseover', event 
 // click event for Delete Entry button and Edit Entry button
 
 const prefillSearch = (entryObject) => {
-    console.log(entryObject)
     document.getElementById('journalId').value = entryObject.id
     document.getElementById('journalDate').value = entryObject.date
     document.getElementById('journalMood').value = entryObject.moodId
@@ -97,20 +141,31 @@ const prefillSearch = (entryObject) => {
     document.getElementById('journalEntry').value = entryObject.entry
 }
 
+const prefillTags = (tags, entryId) => {
+    Array.from(document.getElementsByClassName("checked")).map(checkbox => {
+        checkbox.checked = false;
+        checkbox.className = "unchecked";
+    })
+    tags.filter(tag => tag.entriesId == entryId).forEach(entryTag => {
+        document.getElementById(`tag-${entryTag.tagsId}`).checked = true;
+        document.getElementById(`tag-${entryTag.tagsId}`).className = "checked";
+    })
+}
+
 document.querySelector('.entryLog').addEventListener('click', event => {
     if (event.target.id.startsWith('delete')) {
         let entryID = event.target.id.split('-')[1]
         data.deleteJournalEntry(entryID)
-        .then( () => data.getJournalEntries())
-        .then(data => {
-            entriesDOM.renderJournalEntries(data)
-        })
+            .then( () => data.getJournalEntries())
+            .then(data => {
+                entriesDOM.renderJournalEntries(data)
+            })
     } else if (event.target.id.startsWith('edit')) {
-        let entryID = event.target.id.split('-')[1]
-        data.getJournalEntry(entryID)
-        .then(entryObject => {
-            prefillSearch(entryObject)
-        })
+        let entryId = event.target.id.split('-')[1]
+        data.getJournalEntry(entryId)
+            .then(entryObject => prefillSearch(entryObject))
+        data.getEntriesTags()
+            .then(entriesTags => prefillTags(entriesTags, entryId))
     }
 })
 

@@ -1,0 +1,5 @@
+Post associated entry tags to DOM along with their respective entries. 
+
+Filter/search for entries by tag?
+
+Figure out how to PUT entriesTags instead of DELETEing and then POSTing (when edit button clicked, and then record journal button clicked). 
